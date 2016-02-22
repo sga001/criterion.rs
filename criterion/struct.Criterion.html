@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Criterion` struct in crate `criterion`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Criterion">
+
+    <title>criterion::Criterion - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>criterion</a></p><script>window.sidebarCurrent = {name: 'Criterion', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>criterion</a>::<wbr><a class='struct' href=''>Criterion</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-1582' class='srclink' href='../src/criterion/lib.rs.html#268-277' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Criterion {
+    // some fields omitted
+}</pre><div class='docblock'><p>The benchmark manager</p>
+
+<p><code>Criterion</code> lets you configure and execute benchmarks</p>
+
+<p>Each benchmark consists of four phases:</p>
+
+<ul>
+<li><strong>Warm-up</strong>: The routine is repeatedly executed, to let the CPU/OS/JIT/interpreter adapt to
+the new load</li>
+<li><strong>Measurement</strong>: The routine is repeatedly executed, and timing information is collected into
+a sample</li>
+<li><strong>Analysis</strong>: The sample is analyzed and distiled into meaningful statistics that get
+reported to stdout, stored in files, and plotted</li>
+<li><strong>Comparison</strong>: The current sample is compared with the sample obtained in the previous
+benchmark. If a significant regression in performance is spotted, <code>Criterion</code> will trigger a
+task panic</li>
+</ul>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a></code></h3><div class='impl-items'><h4 id='method.sample_size' class='method'><code>fn <a href='#method.sample_size' class='fnname'>sample_size</a>(&amp;mut self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;mut <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a></code></h4>
+<div class='docblock'><p>Changes the size of the sample</p>
+
+<p>A bigger sample should yield more accurate results, if paired with a &quot;sufficiently&quot; large
+measurement time, on the other hand, it also increases the analysis time</p>
+
+<h1 id='panics' class='section-header'><a href='#panics'>Panics</a></h1>
+<p>Panics if set to zero</p>
+</div><h4 id='method.warm_up_time' class='method'><code>fn <a href='#method.warm_up_time' class='fnname'>warm_up_time</a>(&amp;mut self, ns: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; &amp;mut <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a></code></h4>
+<div class='docblock'><p>Changes the warm up time</p>
+
+<h1 id='panics-1' class='section-header'><a href='#panics-1'>Panics</a></h1>
+<p>Panics if the warm up time is set to a non-positive value</p>
+</div><h4 id='method.measurement_time' class='method'><code>fn <a href='#method.measurement_time' class='fnname'>measurement_time</a>(&amp;mut self, ns: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u64.html'>u64</a>) -&gt; &amp;mut <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a></code></h4>
+<div class='docblock'><p>Changes the measurement time</p>
+
+<p>With a longer time, the measurement will become more resilient to transitory peak loads
+caused by external programs</p>
+
+<p><strong>Note</strong>: If the measurement time is too &quot;low&quot;, Criterion will automatically increase it</p>
+
+<h1 id='panics-2' class='section-header'><a href='#panics-2'>Panics</a></h1>
+<p>Panics if the measurement time is set to a non-positive value</p>
+</div><h4 id='method.nresamples' class='method'><code>fn <a href='#method.nresamples' class='fnname'>nresamples</a>(&amp;mut self, n: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;mut <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a></code></h4>
+<div class='docblock'><p>Changes the number of resamples</p>
+
+<p>Number of resamples to use for the
+<a href="http://en.wikipedia.org/wiki/Bootstrapping_(statistics)#Case_resampling">bootstrap</a></p>
+
+<p>A larger number of resamples reduces the random sampling errors, which are inherent to the
+bootstrap method, but also increases the analysis time</p>
+
+<h1 id='panics-3' class='section-header'><a href='#panics-3'>Panics</a></h1>
+<p>Panics if the number of resamples is set to zero</p>
+</div><h4 id='method.noise_threshold' class='method'><code>fn <a href='#method.noise_threshold' class='fnname'>noise_threshold</a>(&amp;mut self, threshold: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; &amp;mut <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a></code></h4>
+<div class='docblock'><p>Changes the noise threshold</p>
+
+<p>This threshold is used to decide if an increase of <code>X%</code> in the execution time is considered
+significant or should be flagged as noise</p>
+
+<p><em>Note:</em> A value of <code>0.02</code> is equivalent to <code>2%</code></p>
+
+<h1 id='panics-4' class='section-header'><a href='#panics-4'>Panics</a></h1>
+<p>Panics is the threshold is set to a negative value</p>
+</div><h4 id='method.confidence_level' class='method'><code>fn <a href='#method.confidence_level' class='fnname'>confidence_level</a>(&amp;mut self, cl: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; &amp;mut <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a></code></h4>
+<div class='docblock'><p>Changes the confidence level</p>
+
+<p>The confidence level is used to calculate the
+<a href="https://en.wikipedia.org/wiki/Confidence_interval">confidence intervals</a> of the estimated
+statistics</p>
+
+<h1 id='panics-5' class='section-header'><a href='#panics-5'>Panics</a></h1>
+<p>Panics if the confidence level is set to a value outside the <code>(0, 1)</code> range</p>
+</div><h4 id='method.significance_level' class='method'><code>fn <a href='#method.significance_level' class='fnname'>significance_level</a>(&amp;mut self, sl: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>) -&gt; &amp;mut <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a></code></h4>
+<div class='docblock'><p>Changes the <a href="https://en.wikipedia.org/wiki/Statistical_significance">significance level</a></p>
+
+<p>The significance level is used for
+<a href="https://en.wikipedia.org/wiki/Statistical_hypothesis_testing">hypothesis testing</a></p>
+
+<h1 id='panics-6' class='section-header'><a href='#panics-6'>Panics</a></h1>
+<p>Panics if the significance level is set to a value outside the <code>(0, 1)</code> range</p>
+</div><h4 id='method.with_plots' class='method'><code>fn <a href='#method.with_plots' class='fnname'>with_plots</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a></code></h4>
+<div class='docblock'><p>Enables plotting</p>
+</div><h4 id='method.without_plots' class='method'><code>fn <a href='#method.without_plots' class='fnname'>without_plots</a>(&amp;mut self) -&gt; &amp;mut <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a></code></h4>
+<div class='docblock'><p>Disabled plotting</p>
+</div><h4 id='method.can_plot' class='method'><code>fn <a href='#method.can_plot' class='fnname'>can_plot</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Checks if plotting is possible</p>
+</div><h4 id='method.bench' class='method'><code>fn <a href='#method.bench' class='fnname'>bench</a>&lt;F&gt;(&amp;mut self, id: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, f: F) -&gt; &amp;mut <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a> <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;mut <a class='struct' href='../criterion/struct.Bencher.html' title='criterion::Bencher'>Bencher</a>)</span></code></h4>
+<div class='docblock'><p>Benchmarks a function</p>
+
+<p>The function under test must follow the setup - bench - teardown pattern:</p>
+
+<pre><code class="language-ignore-test">use criterion::{Bencher, Criterion};
+
+fn routine(b: &amp;mut Bencher) {
+    // Setup (construct data, allocate memory, etc)
+
+    b.iter(|| {
+        // Code to benchmark goes here
+    })
+
+    // Teardown (free resources)
+}
+
+Criterion::default().bench(&quot;routine&quot;, routine);
+</code></pre>
+</div><h4 id='method.bench_with_inputs' class='method'><code>fn <a href='#method.bench_with_inputs' class='fnname'>bench_with_inputs</a>&lt;I, F&gt;(&amp;mut self, id: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, f: F, inputs: I) -&gt; &amp;mut <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a> <span class='where'>where I: <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/trait.IntoIterator.html' title='core::iter::IntoIterator'>IntoIterator</a>, I::Item: <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a>, F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>(&amp;mut <a class='struct' href='../criterion/struct.Bencher.html' title='criterion::Bencher'>Bencher</a>, &amp;I::Item)</span></code></h4>
+<div class='docblock'><p>Benchmarks a function under various inputs</p>
+
+<p>This is a convenience method to execute several related benchmarks. Each benchmark will
+receive the id: <code>${id}/${input}</code>.</p>
+
+<pre><code class="language-ignore-test">use criterion::{Bencher, Criterion};
+
+Criterion::default().bench_with_inputs(&quot;from_elem&quot;, |b: &amp;mut Bencher, &amp;size: &amp;usize| {
+    b.iter(|| Vec::from_elem(size, 0u8));
+}, [1024, 2048, 4096]);
+</code></pre>
+</div><h4 id='method.bench_program' class='method'><code>fn <a href='#method.bench_program' class='fnname'>bench_program</a>(&amp;mut self, id: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, program: <a class='struct' href='https://doc.rust-lang.org/nightly/std/process/struct.Command.html' title='std::process::Command'>Command</a>) -&gt; &amp;mut <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a></code></h4>
+<div class='docblock'><p>Benchmarks an external program</p>
+
+<p>The external program must conform to the following specification:</p>
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>BufRead</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>time</span>::<span class='ident'>Instant</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>stdin</span> <span class='op'>=</span> <span class='ident'>io</span>::<span class='ident'>stdin</span>();
+    <span class='kw'>let</span> <span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>stdin</span> <span class='op'>=</span> <span class='ident'>stdin</span>.<span class='ident'>lock</span>();
+
+    <span class='comment'>// For each line in stdin</span>
+    <span class='kw'>for</span> <span class='ident'>line</span> <span class='kw'>in</span> <span class='ident'>stdin</span>.<span class='ident'>lines</span>() {
+        <span class='comment'>// Parse line as the number of iterations</span>
+        <span class='kw'>let</span> <span class='ident'>iters</span>: <span class='ident'>u64</span> <span class='op'>=</span> <span class='ident'>line</span>.<span class='ident'>unwrap</span>().<span class='ident'>trim</span>().<span class='ident'>parse</span>().<span class='ident'>unwrap</span>();
+
+        <span class='comment'>// Setup</span>
+
+        <span class='comment'>// Benchmark</span>
+        <span class='kw'>let</span> <span class='ident'>start</span> <span class='op'>=</span> <span class='ident'>Instant</span>::<span class='ident'>now</span>();
+        <span class='comment'>// Execute the routine &quot;iters&quot; times</span>
+        <span class='kw'>for</span> _ <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>iters</span> {
+            <span class='comment'>// Code to benchmark goes here</span>
+        }
+        <span class='kw'>let</span> <span class='ident'>elapsed</span> <span class='op'>=</span> <span class='ident'>start</span>.<span class='ident'>elapsed</span>();
+
+        <span class='comment'>// Teardown</span>
+
+        <span class='comment'>// Report elapsed time in nanoseconds to stdout</span>
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>elapsed</span>.<span class='ident'>to_nanos</span>());
+    }
+}</pre>
+</div><h4 id='method.bench_program_with_inputs' class='method'><code>fn <a href='#method.bench_program_with_inputs' class='fnname'>bench_program_with_inputs</a>&lt;I, F&gt;(&amp;mut self, id: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, program: F, inputs: I) -&gt; &amp;mut <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a> <span class='where'>where F: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>() -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/std/process/struct.Command.html' title='std::process::Command'>Command</a>, I: <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/trait.IntoIterator.html' title='core::iter::IntoIterator'>IntoIterator</a>, I::Item: <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a></span></code></h4>
+<div class='docblock'><p>Benchmarks an external program under various inputs</p>
+
+<p>This is a convenience method to execute several related benchmarks. Each benchmark will
+receive the id: <code>${id}/${input}</code>.</p>
+</div><h4 id='method.summarize' class='method'><code>fn <a href='#method.summarize' class='fnname'>summarize</a>(&amp;mut self, id: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; &amp;mut <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a></code></h4>
+<div class='docblock'><p>Summarize the results stored under the <code>.criterion/${id}</code> folder</p>
+
+<p><em>Note:</em> The <code>bench_with_inputs</code> and <code>bench_program_with_inputs</code> functions internally call
+the <code>summarize</code> method</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html' title='core::default::Default'>Default</a> for <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a></code></h3><div class='impl-items'><h4 id='method.default' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html#method.default' class='fnname'>default</a>() -&gt; <a class='struct' href='../criterion/struct.Criterion.html' title='criterion::Criterion'>Criterion</a></code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "criterion";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

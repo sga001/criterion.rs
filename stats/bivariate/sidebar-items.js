@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["regression","Regression analysis"]],"struct":[["Data","Bivariate `(X, Y)` dataInvariants:No `NaN`s in the data At least two data points in the set"],["Pairs","Iterator over `Data`"]]});

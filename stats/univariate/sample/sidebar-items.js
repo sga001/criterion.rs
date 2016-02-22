@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Sample","A collection of data points drawn from a populationInvariants:The sample contains at least 2 data points The sample contains no `NaN`s"]]});
